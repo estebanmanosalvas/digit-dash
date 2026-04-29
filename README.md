@@ -1,2 +1,2 @@
 # digit-dash
-DIGIT DASH is a fast-paced mental math training game. Test your arithmetic speed across three difficulty levels and three game modes — Normal, Endless, and Blitz. Features personal best tracking, sound effects, and streak multipliers. Built with vanilla HTML, CSS, and JavaScript — no frameworks needed.
+A simple but addictive mental math game. Pick a difficulty, choose your mode, and answer as many questions as you can — DIGIT DASH keeps track of your personal best so the challenge never gets old.
