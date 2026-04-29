@@ -527,51 +527,6 @@
     box-shadow: 0 0 20px rgba(255,56,96,0.3);
   }
 
-  .lb-row {
-    display: grid;
-    grid-template-columns: 28px 1fr auto;
-    gap: 8px;
-    align-items: center;
-    padding: 7px 10px;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    animation: fadeIn 0.2s ease;
-  }
-
-  .lb-row:last-child { border-bottom: none; }
-  .lb-row.me { background: rgba(0,245,255,0.05); }
-
-  .lb-rank { color: var(--dim); text-align: center; font-family: var(--display); font-size: 1rem; }
-  .lb-rank.gold { color: #ffd700; }
-  .lb-rank.silver { color: #c0c0c0; }
-  .lb-rank.bronze { color: #cd7f32; }
-
-  .lb-name { color: var(--text); text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .lb-meta { font-size: 0.6rem; color: var(--dim); margin-top: 2px; }
-
-  .lb-score { color: var(--yellow); font-family: var(--display); font-size: 1.1rem; text-align: right; }
-
-  .lb-tab {
-    flex: 1;
-    background: none;
-    border: none;
-    border-right: 1px solid var(--border);
-    color: var(--dim);
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
-    padding: 8px 4px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.15s;
-  }
-  .lb-tab:last-child { border-right: none; }
-  .lb-tab:hover { color: var(--text); background: rgba(255,255,255,0.03); }
-  .lb-tab.active { color: var(--cyan); background: rgba(0,245,255,0.05); box-shadow: inset 0 -2px 0 var(--cyan); }
-
-  .lb-loading { color: var(--dim); font-size: 0.65rem; letter-spacing: 0.3em; text-align: center; padding: 20px; }
-
   @keyframes comboPop {
     0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
     30% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
@@ -589,36 +544,6 @@
   </div>
 
   <div class="panel">
-
-    <!-- LEADERBOARD SCREEN -->
-    <div class="screen hidden" id="leaderboardScreen">
-      <div class="screen-title cyan" style="font-size:2rem; margin-bottom:4px;">🏆 LEADERBOARD</div>
-      <div style="display:flex; gap:0; width:100%; margin-bottom:4px; border:1px solid var(--border);">
-        <button class="lb-tab active" id="lbTab-easy" onclick="switchLbTab('easy')">EASY</button>
-        <button class="lb-tab" id="lbTab-medium" onclick="switchLbTab('medium')">MEDIUM</button>
-        <button class="lb-tab" id="lbTab-hard" onclick="switchLbTab('hard')">HARD</button>
-      </div>
-      <div style="display:flex; gap:0; width:100%; margin-bottom:8px; border:1px solid var(--border);">
-        <button class="lb-tab lb-mode-tab active" id="lbModeTab-normal" onclick="switchLbMode('normal')">⚔ NORMAL</button>
-        <button class="lb-tab lb-mode-tab" id="lbModeTab-blitz" onclick="switchLbMode('blitz')">⚡ BLITZ</button>
-      </div>
-      <div id="lbList" style="width:100%; max-height:210px; overflow-y:auto; margin: 0 0 8px;"></div>
-      <button class="big-btn" onclick="hideLeaderboard()">BACK</button>
-    </div>
-
-    <!-- SUBMIT NAME SCREEN -->
-    <div class="screen hidden" id="submitScreen">
-      <div class="screen-title green" style="font-size:2rem;">SUBMIT SCORE</div>
-      <div class="screen-stat">YOUR SCORE <span id="submitScoreDisplay">0</span></div>
-      <input id="nameInput" type="text" maxlength="12" placeholder="ENTER NAME"
-        style="background:rgba(0,245,255,0.05); border:1px solid var(--cyan); color:var(--text);
-               font-family:var(--mono); font-size:1rem; letter-spacing:0.2em; padding:10px 16px;
-               width:100%; text-align:center; outline:none; text-transform:uppercase; margin:8px 0;"
-        onkeydown="if(event.key==='Enter') submitScore()"
-      />
-      <button class="big-btn" onclick="submitScore()">SUBMIT</button>
-      <button class="big-btn" style="font-size:0.9rem; padding:10px 30px; border-color:var(--dim); color:var(--dim);" onclick="skipSubmit()">SKIP</button>
-    </div>
 
     <!-- START SCREEN -->
     <div class="screen" id="startScreen">
@@ -640,7 +565,6 @@
       </div>
       <div id="pbDisplay" style="font-size:0.65rem; letter-spacing:0.25em; color:var(--dim); text-align:center; min-height:18px;"></div>
       <button class="big-btn" onclick="startGame()">START GAME</button>
-      <button class="big-btn" style="font-size:0.9rem; padding:10px 30px; border-color:var(--dim); color:var(--dim); margin-top:4px;" onclick="showLeaderboard()">🏆 LEADERBOARD</button>
     </div>
 
     <!-- GAME OVER SCREEN -->
@@ -651,9 +575,7 @@
       <div class="screen-stat">BEST STREAK <span id="finalStreak">0</span></div>
       <div class="screen-stat">CORRECT <span id="finalCorrect">0</span></div>
       <div class="screen-stat" id="finalWrongStat" style="display:none">WRONG <span id="finalWrong">0</span></div>
-      <button class="big-btn" id="submitBtn" onclick="showSubmit()">SUBMIT SCORE</button>
-      <button class="big-btn" style="font-size:0.9rem; padding:10px 30px; border-color:var(--dim); color:var(--dim); margin-top:-8px;" onclick="showLeaderboard()">🏆 LEADERBOARD</button>
-      <button class="big-btn" style="font-size:0.9rem; padding:10px 30px; border-color:var(--dim); color:var(--dim); margin-top:-8px;" onclick="showStart()">PLAY AGAIN</button>
+      <button class="big-btn" onclick="showStart()">PLAY AGAIN</button>
     </div>
 
     <!-- STATS BAR -->
@@ -873,7 +795,6 @@
     gameActive = false;
     clearInterval(timerInterval);
     clearInterval(blitzInterval);
-    lastScore = score;
     // Save personal best (not for endless)
     const isNewPB = gameMode !== 'endless' && score > getPB();
     if (isNewPB) savePB(score);
@@ -886,18 +807,15 @@
       document.getElementById('gameOverTitle').className = 'screen-title cyan';
       document.getElementById('finalWrongStat').style.display = '';
       document.getElementById('finalWrong').textContent = wrongCount;
-      document.getElementById('submitBtn').style.display = 'none';
     } else if (gameMode === 'blitz') {
       document.getElementById('gameOverTitle').textContent = "TIME'S UP!";
       document.getElementById('gameOverTitle').className = 'screen-title yellow';
       document.getElementById('finalWrongStat').style.display = '';
       document.getElementById('finalWrong').textContent = wrongCount;
-      document.getElementById('submitBtn').style.display = '';
     } else {
       document.getElementById('gameOverTitle').textContent = 'GAME OVER';
       document.getElementById('gameOverTitle').className = 'screen-title red';
       document.getElementById('finalWrongStat').style.display = 'none';
-      document.getElementById('submitBtn').style.display = '';
     }
     document.getElementById('gameOverScreen').classList.remove('hidden');
   }
@@ -1145,121 +1063,10 @@
       : '';
   }
 
-  // ── LEADERBOARD ──
-  const LB_KEY = 'digitdash-leaderboard-v1';
-  let lastScore = 0;
-
-  async function loadLeaderboard() {
-    try {
-      const result = await window.storage.get(LB_KEY, true);
-      return result ? JSON.parse(result.value) : [];
-    } catch(e) { return []; }
-  }
-
-  async function saveLeaderboard(entries) {
-    try {
-      await window.storage.set(LB_KEY, JSON.stringify(entries), true);
-    } catch(e) {}
-  }
-
-  let lbActiveDiff = 'easy';
-  let lbActiveMode = 'normal';
-
-  async function showLeaderboard() {
-    hideAllScreens();
-    document.getElementById('leaderboardScreen').classList.remove('hidden');
-    renderLbTab();
-  }
-
-  async function switchLbTab(diff) {
-    lbActiveDiff = diff;
-    document.querySelectorAll('.lb-tab:not(.lb-mode-tab)').forEach(b => b.classList.remove('active'));
-    document.getElementById(`lbTab-${diff}`).classList.add('active');
-    renderLbTab();
-  }
-
-  async function switchLbMode(m) {
-    lbActiveMode = m;
-    document.querySelectorAll('.lb-mode-tab').forEach(b => b.classList.remove('active'));
-    document.getElementById(`lbModeTab-${m}`).classList.add('active');
-    renderLbTab();
-  }
-
-  async function renderLbTab() {
-    const list = document.getElementById('lbList');
-    list.innerHTML = '<div class="lb-loading">LOADING...</div>';
-    const all = await loadLeaderboard();
-    const entries = all.filter(e =>
-      (e.difficulty || 'easy') === lbActiveDiff &&
-      (e.gameMode || 'normal') === lbActiveMode
-    );
-    if (!entries.length) {
-      list.innerHTML = '<div class="lb-loading">NO SCORES YET — BE THE FIRST!</div>';
-      return;
-    }
-    entries.sort((a, b) => b.score - a.score);
-    list.innerHTML = entries.slice(0, 20).map((e, i) => {
-      const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
-      const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1;
-      return `<div class="lb-row">
-        <div class="lb-rank ${rankClass}">${medal}</div>
-        <div>
-          <div class="lb-name">${e.name}</div>
-          <div class="lb-meta">streak ${e.streak}</div>
-        </div>
-        <div class="lb-score">${e.score.toLocaleString()}</div>
-      </div>`;
-    }).join('');
-  }
-
-  function hideLeaderboard() {
-    document.getElementById('leaderboardScreen').classList.add('hidden');
-    document.getElementById('startScreen').classList.remove('hidden');
-  }
-
   function hideAllScreens() {
-    ['startScreen','gameOverScreen','leaderboardScreen','submitScreen'].forEach(id =>
+    ['startScreen','gameOverScreen'].forEach(id =>
       document.getElementById(id).classList.add('hidden')
     );
-  }
-
-  function showSubmit() {
-    hideAllScreens();
-    document.getElementById('submitScreen').classList.remove('hidden');
-    document.getElementById('submitScoreDisplay').textContent = lastScore.toLocaleString();
-    document.getElementById('nameInput').value = '';
-    setTimeout(() => document.getElementById('nameInput').focus(), 100);
-  }
-
-  function skipSubmit() {
-    hideAllScreens();
-    document.getElementById('startScreen').classList.remove('hidden');
-  }
-
-  async function submitScore() {
-    const raw = document.getElementById('nameInput').value.trim().toUpperCase();
-    const name = raw || 'ANONYMOUS';
-    const entries = await loadLeaderboard();
-    entries.push({
-      name,
-      score: lastScore,
-      streak: bestStreak,
-      difficulty,
-      gameMode,
-      endless: gameMode === 'endless',
-      date: Date.now()
-    });
-    // Keep top 100
-    entries.sort((a, b) => b.score - a.score);
-    if (entries.length > 100) entries.length = 100;
-    await saveLeaderboard(entries);
-    lbActiveDiff = difficulty;
-    lbActiveMode = gameMode;
-    await showLeaderboard();
-    document.querySelectorAll('.lb-tab:not(.lb-mode-tab)').forEach(b => b.classList.remove('active'));
-    document.getElementById(`lbTab-${difficulty}`).classList.add('active');
-    document.querySelectorAll('.lb-mode-tab').forEach(b => b.classList.remove('active'));
-    document.getElementById(`lbModeTab-${gameMode}`).classList.add('active');
   }
 
   // ── INIT ──
@@ -1267,3 +1074,4 @@
 </script>
 </body>
 </html>
+
